@@ -1,4 +1,6 @@
-﻿namespace CompsKitMarket.Core.Entities.Orders
+﻿using System.Collections.Generic;
+
+namespace CompsKitMarket.Core.Entities.Orders
 {
     public class Store : NamedEntity
     {
@@ -14,6 +16,9 @@
         public string Mail { get; set; }
 
         public bool Deleted { get; set; }
+
+        public List<Order> Orders { get; set; }
+        public List<PartStore> PartStores { get; set; }
     }
 
 }

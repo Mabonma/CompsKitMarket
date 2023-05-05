@@ -17,5 +17,6 @@ namespace CompsKitMarket.Core.Entities.Identity
         public bool Deleted { get; set; }
         public int? StoreId { get; set; }
         public Store Store { get; set; }
+        public List<Order> Orders { get; set; }
     }
 }

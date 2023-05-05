@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CompsKitMarket.Core.Entities.Kits
 {
-    public class ProcSocket : NamedEntity
+    public class CoolerTypes : NamedEntity
     {
-        public List<Motherboard> Motherboards { get; set; }
-        public List<Cpu> Cpus { get; set; }
+        public string Descrtiption { get; set; }
         public List<Cooler> Coolers { get; set; }
     }
 }

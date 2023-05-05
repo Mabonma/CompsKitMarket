@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CompsKitMarket.Core.Entities.Kits;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,5 +10,6 @@ namespace CompsKitMarket.Core.Entities.Orders
     public class Manufacturer : NamedEntity
     {
         public string Description { get; set; }
+        public List<Part> Parts { get; set; }
     }
 }
