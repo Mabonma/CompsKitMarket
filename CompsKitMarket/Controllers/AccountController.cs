@@ -1,6 +1,7 @@
 ﻿using CompsKitMarket.Core.Entities.Identity;
 using CompsKitMarket.Core.Repositories;
 using CompsKitMarket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -23,6 +24,50 @@ namespace CompsKitMarket.Controllers
             _signInManager = signInManager;
 
             _usersRepository = usersRepository;
+        }
+
+        [Authorize]
+        public async Task<IActionResult> Index()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var model = new UserModel
+            {
+                Surname = user.Surname,
+                Name = user.Name,
+                SecondName = user.SecondName,
+                Login = user.UserName
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(UserModel model)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            user.Surname = model.Surname;
+            user.Name = model.Name;
+            user.SecondName = model.SecondName;
+
+            user.UserName = model.Login;
+            user.NormalizedUserName = model.Login.ToUpper();
+
+            if (!string.IsNullOrEmpty(model.Password))
+                user.PasswordHash = new PasswordHasher<User>().HashPassword(user, model.Password);
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, false);
+                TempData["Success"] = "Успешно";
+                return RedirectToAction("Index", "Account");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                    ModelState.AddModelError(string.Empty, item.Description);
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -79,6 +124,7 @@ namespace CompsKitMarket.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(user, "Client");
                 await _signInManager.SignInAsync(user, false);
                 return RedirectToAction("Index", "Home");
             }
