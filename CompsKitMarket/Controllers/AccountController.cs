@@ -55,6 +55,41 @@ namespace CompsKitMarket.Controllers
             }
         }
 
+        public IActionResult Registration()
+        {
+            var model = new RegisterModel();
+            return View("Registration", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registration(RegisterModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            User user = new User
+            {
+                UserName = model.Login,
+                NormalizedUserName = _userManager.NormalizeName(model.Login),
+                Surname = model.Surname,
+                Name = model.Name,
+                SecondName = model.SecondName,
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, false);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                    ModelState.AddModelError(string.Empty, item.Description);
+                return View(model);
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()

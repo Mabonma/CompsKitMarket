@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using CompsKitMarket.Core;
 using CompsKitMarket.Core.Entities.Identity;
 using CompsKitMarket.Core.Repositories;
+using CompsKitMarket.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -43,7 +44,8 @@ namespace CompsKitMarket
 
                 options.User.RequireUniqueEmail = false;
             })
-            .AddEntityFrameworkStores<MarketContext>();
+            .AddEntityFrameworkStores<MarketContext>()
+            .AddRussianErrorDescriber();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
