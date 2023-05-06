@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CompsKitMarket.Core;
 using CompsKitMarket.Core.Entities.Identity;
+using CompsKitMarket.Core.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,6 +28,8 @@ namespace CompsKitMarket
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<UsersRepository>();
+
             services.AddControllersWithViews();
             services.AddDbContext<MarketContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

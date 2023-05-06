@@ -1,0 +1,25 @@
+﻿@*@model EmployeeUserModel
+
+<div class="row">
+
+    <div class="col-lg-8">
+        <form method="post" asp-controller="Account" asp-action="SaveEmployeeData">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Employee.Id)
+
+            <partial name="_EmployeePartial" model=Model.Employee />
+        </form>
+    </div>
+
+    <div class="col-lg-4">
+        <form method="post" asp-controller="Account" asp-action="SaveUserData">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.User.Id)
+
+            <partial name="_UserPartial" model=Model.User />
+        </form>
+    </div>
+    <label class="error"><div asp-validation-summary="All"></div></label>
+
+</div>
+*@
