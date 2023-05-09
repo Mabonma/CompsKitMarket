@@ -35,7 +35,9 @@ namespace CompsKitMarket.Controllers
                 Surname = user.Surname,
                 Name = user.Name,
                 SecondName = user.SecondName,
-                Login = user.UserName
+                Login = user.UserName,
+                Mobile = user.PhoneNumber,
+                Address = user.Address,
             };
             return View(model);
         }
@@ -49,6 +51,9 @@ namespace CompsKitMarket.Controllers
             user.Surname = model.Surname;
             user.Name = model.Name;
             user.SecondName = model.SecondName;
+
+            user.PhoneNumber = model.Mobile;
+            user.Address = model.Address;
 
             user.UserName = model.Login;
             user.NormalizedUserName = model.Login.ToUpper();
@@ -120,6 +125,8 @@ namespace CompsKitMarket.Controllers
                 Surname = model.Surname,
                 Name = model.Name,
                 SecondName = model.SecondName,
+                PhoneNumber = model.Mobile,
+                Address = model.Address,
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)

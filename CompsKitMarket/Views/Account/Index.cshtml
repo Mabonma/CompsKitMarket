@@ -35,6 +35,23 @@
 
             <div class="col-md-4">
                 <div class="mb-3">
+                    <label asp-for="Mobile" class="control-label"></label>
+                    <input asp-for="Mobile" class="form-control" />
+                    <span asp-validation-for="Mobile" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
                     <label asp-for="Login" class="control-label"></label>
                     <input asp-for="Login" class="form-control" autocomplete="new-address" />
                     <span asp-validation-for="Login" class="text-danger"></span>

@@ -16,6 +16,15 @@ namespace CompsKitMarket.Models
 
 
         [Required(ErrorMessage = "Обязательное поле")]
+        [Display(Name = "Телефон")]
+        public string Mobile { get; set; } = null!;
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        [Display(Name = "Адрес")]
+        public string Address { get; set; } = null!;
+
+
+        [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Логин")]
         public string Login { get; set; } = null!;
 
