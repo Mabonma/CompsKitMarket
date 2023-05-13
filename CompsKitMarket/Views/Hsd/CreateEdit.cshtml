@@ -1,0 +1,60 @@
+﻿@model HsdModel
+@{
+    ViewData["Title"] = Model.IsNew ? "Добавление" : "Редактирование";
+    string text = Model.IsNew ? "Добавление" : "Редактирование";
+}
+
+<div class="pb-3 bg-light p-5 rounded border">
+    <h4>
+        @text
+    </h4>
+    <hr />
+    <form asp-action="Save" method="post">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <select asp-for="Type" asp-items="Html.GetEnumSelectList<HsdTypes>()">
+                <option selected="selected" value="">Выберите тип</option>
+            </select>
+
+            <div class="w-100"><hr></div>
+            
+            <select asp-for="Connections" asp-items="Html.GetEnumSelectList<HsdConnections>()">
+                <option selected="selected" value="">Выберите подключение</option>
+            </select>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Vol" class="control-label"></label>
+                    <input asp-for="Vol" class="form-control" />
+                    <span asp-validation-for="Vol" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <select asp-for="Form" asp-items="Html.GetEnumSelectList<HsdForms>()">
+                <option selected="selected" value="">Выберите форм-фактор</option>
+            </select>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="submit" value="Завершить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -118,7 +118,7 @@ namespace CompsKitMarket.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            User user = new User
+            User user = new()
             {
                 UserName = model.Login,
                 NormalizedUserName = _userManager.NormalizeName(model.Login),

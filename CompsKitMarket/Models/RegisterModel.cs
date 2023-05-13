@@ -9,10 +9,10 @@ namespace CompsKitMarket.Models
         public string Surname { get; set; } = null!;
 
         [Display(Name = "Имя")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Отчество")]
-        public string? SecondName { get; set; }
+        public string SecondName { get; set; }
 
 
         [Required(ErrorMessage = "Обязательное поле")]

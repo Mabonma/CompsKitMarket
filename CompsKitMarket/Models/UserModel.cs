@@ -9,10 +9,10 @@ namespace CompsKitMarket.Models
         public string Surname { get; set; } = null!;
 
         [Display(Name = "Имя")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Display(Name = "Отчество")]
-        public string? SecondName { get; set; }
+        public string SecondName { get; set; }
 
 
         [Required(ErrorMessage = "Обязательное поле")]
@@ -30,11 +30,11 @@ namespace CompsKitMarket.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
-        public string? Password { get; set; }
+        public string Password { get; set; }
 
         [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         [DataType(DataType.Password)]
         [Display(Name = "Подтвердить пароль")]
-        public string? PasswordConfirm { get; set; }
+        public string PasswordConfirm { get; set; }
     }
 }
