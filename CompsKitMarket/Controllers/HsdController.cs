@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace CompsKitMarket.Controllers
@@ -30,6 +31,7 @@ namespace CompsKitMarket.Controllers
                 .Select(x => new HsdModel
                 {
                     Id = x.Id,
+                    Manufacturer = x.Manufacturer,
                     Type = x.Type,
                     Description = x.Description,
                     Form = x.Form,
@@ -57,12 +59,6 @@ namespace CompsKitMarket.Controllers
             return View(/*hsds*/items);
         }
 
-        // GET: HsdController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         public ActionResult Create()
         {
             var enity = new HsdModel();
@@ -85,6 +81,8 @@ namespace CompsKitMarket.Controllers
                     _marketContext.Add(new Hsd()
                     {
                         Name = model.Name,
+                        Manufacturer = model.Manufacturer,
+                        ManufacturerID = model.Manufacturer.Id,
                         Type = model.Type,
                         Description = model.Description,
                         Connections = model.Connections,
@@ -96,6 +94,8 @@ namespace CompsKitMarket.Controllers
                 {
                     var old = _marketContext.Hsds.First(x => x.Id == model.Id);
                     old.Name = model.Name;
+                    old.Manufacturer = model.Manufacturer;
+                    old.ManufacturerID = model.Manufacturer.Id;
                     old.Type = model.Type;
                     old.Description = model.Description; 
                     old.Connections = model.Connections;
@@ -114,13 +114,13 @@ namespace CompsKitMarket.Controllers
 
         [HttpGet]
         [Authorize]
-        // GET: HsdController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             var entity = await _marketContext.Hsds
                 .Select(x => new HsdModel
                 {
                     Id = x.Id,
+                    Manufacturer = x.Manufacturer,
                     Type = x.Type,
                     Description = x.Description,
                     Form = x.Form,
@@ -133,28 +133,11 @@ namespace CompsKitMarket.Controllers
             return View("CreateEdit", entity);
         }
 
-        // POST: HsdController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HsdController/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: HsdController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

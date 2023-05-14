@@ -1,4 +1,5 @@
 ﻿using CompsKitMarket.Core.Entities.Enums;
+using CompsKitMarket.Core.Entities.Orders;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
@@ -10,6 +11,10 @@ namespace CompsKitMarket.Models
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Название")]
         public string Name { get; set; } = null!;
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        [Display(Name = "Производитель")]
+        public Manufacturer Manufacturer { get; set; } = null!;
 
         [NotMapped]
         public bool IsNew => Id == 0;

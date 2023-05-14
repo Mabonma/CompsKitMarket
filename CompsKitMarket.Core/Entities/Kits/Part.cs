@@ -12,7 +12,8 @@ namespace CompsKitMarket.Core.Entities.Kits
         public string Description { get; set; }
         public bool Deleted { get; set; }
         public List<Image> Images { get; set; }
-        public List<Manufacturer> Manufacturers { get; set; }
+        public int ManufacturerID { get; set; }
+        public Manufacturer Manufacturer { get; set; }
         public List<PartStore> PartStores { get; set; }
         public List<Order> Orders { get; set; }
     }

@@ -51,8 +51,9 @@ namespace CompsKitMarket.Core
                 .WithMany(s => s.Parts);
 
             modelBuilder.Entity<Part>()
-                .HasMany(c => c.Manufacturers)
-                .WithMany(s => s.Parts);
+                .HasOne(c => c.Manufacturer)
+                .WithMany(s => s.Parts)
+                .HasForeignKey(p => p.ManufacturerID);
 
             modelBuilder.Entity<PartStore>()
                 .HasKey(u => new { u.PartId, u.StoreId });
