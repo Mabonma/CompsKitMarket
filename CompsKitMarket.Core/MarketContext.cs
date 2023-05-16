@@ -48,7 +48,9 @@ namespace CompsKitMarket.Core
 
             modelBuilder.Entity<Part>()
                 .HasMany(c => c.Images)
-                .WithMany(s => s.Parts);
+                .WithOne(s => s.Part)
+                .HasForeignKey(p => p.PartId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<Part>()
                 .HasOne(c => c.Manufacturer)

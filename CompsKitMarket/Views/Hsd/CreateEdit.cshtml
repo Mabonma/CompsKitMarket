@@ -29,22 +29,22 @@
                 </div>
             </div>
 
-            <select asp-for="Type" asp-items="Html.GetEnumSelectList<HsdTypes>()">
+            <select class="form-select form-select-sm" asp-for="Type" asp-items="Html.GetEnumSelectList<HsdTypes>()">
                 <option selected="selected" value="">Выберите тип</option>
             </select>
 
             <div class="w-100"><hr></div>
 
             <div class="col-md-4">
-                <div class="mb-3">
-                    <label asp-for="Manufacturer.Id" class="control-label"></label>
-                    <input asp-for="Manufacturer.Id" class="form-control" />
-                    <span asp-validation-for="Manufacturer.Id" class="text-danger"></span>
+                <div class="form-group">
+                    <label class="control-label">Производитель</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ManufacturerId, ViewData["Manufacturers"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
                 </div>
             </div>
-
-#error Need add images          
-            <select asp-for="Connections" asp-items="Html.GetEnumSelectList<HsdConnections>()">
+            
+            <select class="form-select form-select-sm" asp-for="Connections" asp-items="Html.GetEnumSelectList<HsdConnections>()">
                 <option selected="selected" value="">Выберите подключение</option>
             </select>
 
@@ -56,7 +56,7 @@
                 </div>
             </div>
             
-            <select asp-for="Form" asp-items="Html.GetEnumSelectList<HsdForms>()">
+            <select class="form-select form-select-sm" asp-for="Form" asp-items="Html.GetEnumSelectList<HsdForms>()">
                 <option selected="selected" value="">Выберите форм-фактор</option>
             </select>
             <div class="col-md-4">

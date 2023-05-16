@@ -11,6 +11,7 @@ namespace CompsKitMarket.Core.Entities
     {
         public byte[] Content { get; set; }
         public FilesExtensions Type { get; set; }
-        public List<Part> Parts { get; set; }
+        public int PartId { get; set; }
+        public Part Part { get; set; }
     }
 }

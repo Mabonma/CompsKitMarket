@@ -5,6 +5,7 @@ using CompsKitMarket.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,11 @@ using System.Threading.Tasks;
 
 namespace CompsKitMarket.Controllers
 {
-    public class HsdController : Controller
+    public class HsdController : BasePartContoller
     {
-        private readonly MarketContext _marketContext;
 
-        public HsdController(MarketContext marketContext)
+        public HsdController(MarketContext marketContext) : base (marketContext)
         {
-            _marketContext = marketContext;
         }
 
         // GET: HsdController
@@ -27,18 +26,20 @@ namespace CompsKitMarket.Controllers
         {
             var items = _marketContext.Hsds
                 .OrderBy(x => x.Id)
-                .ToList()
                 .Select(x => new HsdModel
                 {
                     Id = x.Id,
-                    Manufacturer = x.Manufacturer,
+                    Name = x.Name,
+                    ManufacturerName = x.Manufacturer.Name,
+                    ManufacturerId = x.ManufacturerID,
                     Type = x.Type,
                     Description = x.Description,
                     Form = x.Form,
                     Connections = x.Connections,
                     Vol = x.Vol,
                     Deleted = x.Deleted,
-                });
+                })
+                .ToList();
             /*HsdModel hsd = new() 
             {
                 Id = 1,
@@ -62,6 +63,7 @@ namespace CompsKitMarket.Controllers
         public ActionResult Create()
         {
             var enity = new HsdModel();
+            FillDataManufacturers();
             return View("CreateEdit", enity);
         }
 
@@ -81,8 +83,7 @@ namespace CompsKitMarket.Controllers
                     _marketContext.Add(new Hsd()
                     {
                         Name = model.Name,
-                        Manufacturer = model.Manufacturer,
-                        ManufacturerID = model.Manufacturer.Id,
+                        ManufacturerID = model.ManufacturerId,
                         Type = model.Type,
                         Description = model.Description,
                         Connections = model.Connections,
@@ -94,8 +95,7 @@ namespace CompsKitMarket.Controllers
                 {
                     var old = _marketContext.Hsds.First(x => x.Id == model.Id);
                     old.Name = model.Name;
-                    old.Manufacturer = model.Manufacturer;
-                    old.ManufacturerID = model.Manufacturer.Id;
+                    old.ManufacturerID = model.ManufacturerId;
                     old.Type = model.Type;
                     old.Description = model.Description; 
                     old.Connections = model.Connections;
@@ -120,7 +120,7 @@ namespace CompsKitMarket.Controllers
                 .Select(x => new HsdModel
                 {
                     Id = x.Id,
-                    Manufacturer = x.Manufacturer,
+                    ManufacturerName = x.Manufacturer.Name,
                     Type = x.Type,
                     Description = x.Description,
                     Form = x.Form,
@@ -129,27 +129,16 @@ namespace CompsKitMarket.Controllers
                     Deleted = x.Deleted,
                 })
                 .FirstAsync(x => x.Id == id);
+            FillDataManufacturers();
 
             return View("CreateEdit", entity);
         }
 
+        [HttpDelete]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

@@ -14,7 +14,9 @@ namespace CompsKitMarket.Models
 
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Производитель")]
-        public Manufacturer Manufacturer { get; set; } = null!;
+        public string ManufacturerName { get; set; } = null!;
+
+        public int ManufacturerId { get; set; }
 
         [NotMapped]
         public bool IsNew => Id == 0;

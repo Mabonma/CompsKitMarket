@@ -20,10 +20,8 @@ Html.Grid(Model)
             .Titled("Id")
             .Sortable(true);
         columns.Add(m => m.Name);
-        columns.Add(m => m.Manufacturer.Id)
-            .Titled("Id производителя");
-        columns.Add(m => m.Manufacturer.Name)
-            .Titled("Имя производителя");
+        columns.Add(m => m.ManufacturerName)
+            .Titled("Производитель");
         columns.Add(m => m.Description);
         columns.Add(m => m.Type);
         columns.Add(m => m.Connections);
@@ -38,8 +36,8 @@ Html.Grid(Model)
                  $"<a href='{Url.Action("Edit", new { id = m.Id })}' class='btn btn-xs btn-default' title='Изменить'>" +
                         "<i class='fa fa-edit'></i>" +
                     "</a>" +
-                 $"<button type='button' class='btn btn-xs' data-toggle='modal' data-target='#removeModal' data-remove-id='{m.Id}'>" +
-                        "<i class='fa fa-trash'></i>" +
+                 $"<button type='button' class='btn btn-xs' onclick=CallRemove('{Url.Action("Delete", new { id = m.Id })}')>" +
+                    "<i class='fa fa-trash'></i>" +
                  "</button>")
                 .Encoded(false)
                 .Css("w-100px col-btn-full");
