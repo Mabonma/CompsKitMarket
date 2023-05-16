@@ -27,7 +27,7 @@ namespace CompsKitMarket.Controllers
         {
             var items = _marketContext.Manufacturers
                 .OrderBy(x => x.Id)
-                .Select(x => new ManufacturerModel
+                .Select(x => new ManufacturerTable
                 {
                     Id = x.Id,
                     Name = x.Name,

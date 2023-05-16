@@ -17,7 +17,7 @@ Html.Grid(Model)
         columns.Add(m => m.Description);
 
         columns.Add(m =>
-            $"<a href='{Url.Action("Edit", new { id = m.Id })}' class='btn btn-xs btn-default' title='Изменить'>" +
+            $"<a href='{Url.Action("Edit", new { id = m.Id })}' class='btn btn-xs btn-default' title='Изменить' font>" +
                 "<i class='fa fa-edit'></i>" +
             "</a>" +
             (m.PartCount == 0 ? $"<button type='button' class='btn btn-xs' onclick=CallRemove('{Url.Action("Delete", new { id = m.Id })}')>" +
