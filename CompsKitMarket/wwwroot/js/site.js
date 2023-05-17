@@ -24,3 +24,21 @@ function CallRemove(url) {
         }
     });
 }
+function editModal(url, feedback) {
+    $.ajax({
+        type: "POST",
+        url: url,
+        success: function (response) {
+            $("#for-modal").html(response);
+            $("#directoryModal").modal('show')
+            if (feedback)
+                feedback();
+        },
+        failure: function (response) {
+            console.error(response.responseText);
+        },
+        error: function (response) {
+            console.error(response.responseText);
+        }
+    });
+}

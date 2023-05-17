@@ -1,0 +1,25 @@
+﻿@model IEnumerable<PartStoreModel>
+
+
+@(
+Html.Grid(Model)
+    .Id("mvc-grid")
+    .Build(columns =>
+    {
+        columns.Add(m => m.Name);
+        columns.Add(m => m.Description);
+        columns.Add(m => m.ManufacturerName);
+        columns.Add(m => m.Cost);
+
+        columns.Add(m =>
+                $"<button onclick=\"editModal('{Url.Action("EditPartCost", new { partId = m.Id, storeId = m.StoreId })}')\" class='btn btn - light'>Изменить</button>"
+            ).Encoded(false).Css("w-100px col-btn-full");
+        columns.Add(m =>
+                $"<button data-bs-toggle='modal' data-bs-target='#removeConfirmModal' data-bs-url=\"{Url.Action("RemovePartCost", new { partId = m.Id, storeId = m.StoreId })}\"  class='btn btn-light'>Удалить</button>"
+            ).Encoded(false).Css("w-100px col-btn-full");
+    })
+    .Sortable()
+    .Filterable()
+    .Empty("Нет данных")
+    .Css("table-bordered table-hover")
+)
