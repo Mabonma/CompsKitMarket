@@ -19,6 +19,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
+                    <ul class="navbar-nav flex-grow-1">
                         @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item dropdown">
@@ -30,6 +31,12 @@
                                     <li><a class="dropdown-item" asp-controller="Manufacturer" asp-action="Index">Производители</a></li>
                                     <li><a class="dropdown-item" asp-controller="Store" asp-action="Index">Магазины</a></li>
                                     <li><a class="dropdown-item" asp-controller="Image" asp-action="Index">Картинки</a></li>
+                                    <li><a class="dropdown-item" asp-controller="AdditionalInfo" asp-action="FormFactor">Форм-факторы</a></li>
+                                    <li><a class="dropdown-item" asp-controller="AdditionalInfo" asp-action="ProcSocket">Сокеты процессоров</a></li>
+                                    <li><a class="dropdown-item" asp-controller="AdditionalInfo" asp-action="ProcModel">Модели процессоров</a></li>
+                                    <li><a class="dropdown-item" asp-controller="AdditionalInfo" asp-action="TypeRam">Типы памяти</a></li>
+                                    <li><a class="dropdown-item" asp-controller="AdditionalInfo" asp-action="CoolerType">Типы куллеров</a></li>
+                                    <li><a class="dropdown-item" asp-controller="AdditionalInfo" asp-action="GrafProc">Графические процессоры</a></li>
                                 </ul>
                             </li>
                             

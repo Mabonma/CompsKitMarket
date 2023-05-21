@@ -1,0 +1,60 @@
+﻿@model CompsKitMarket.Models.AdditionalInfo.AdditionalInfoModel
+@{
+    string text = Model.Element.IsNew ? "Добавление" : "Редактирование";
+    ViewData["Title"] = text;
+}
+
+<div class="pb-3 bg-light p-5 rounded border">
+    <h4>
+        @text
+    </h4>
+    <hr />
+    <form href='@Url.Action("Save" + Model.AddToHtml, Model)' method="post">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Element.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Element.Name" class="control-label"></label>
+                    <input asp-for="Element.Name" class="form-control" />
+                    <span asp-validation-for="Element.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            @if (Model.Element.IsCooler)
+            {
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="Element.Description" class="control-label"></label>
+                        <input asp-for="Element.Description" class="form-control" />
+                        <span asp-validation-for="Element.Description" class="text-danger"></span>
+                    </div>
+                </div>
+            }
+
+            @if (Model.Element.IsGprocs)
+            {
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label asp-for="Element.Freq" class="control-label"></label>
+                        <input asp-for="Element.Freq" class="form-control" />
+                        <span asp-validation-for="Element.Freq" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <select class="form-select form-select-sm" asp-for="Element.GProcs" asp-items="Html.GetEnumSelectList<GProcs>()">
+                    <option selected="selected" value="">Выберите производителя</option>
+                </select>
+            }
+
+            <div class="w-100"><hr></div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
