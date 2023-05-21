@@ -16,10 +16,21 @@ Html.Grid(Model)
     .Id("mvc-grid")
     .Build(columns =>
     {
-        columns.Add(m => m.Id)
-            .Titled("Id")
-            .Sortable(true);
+        if (User.IsInRole("Admin"))
+        {
+            columns.Add(m => m.Id)
+                .Titled("Id")
+                .Sortable(true);
+        }
         columns.Add(m => m.Name);
+        columns.Add(m =>
+        $"<div class='div-square'>" +
+        $"    <div class='div-square-margin'></div>" +
+        $"    <div class='div-square-content'>" +
+        $"            <img class='card-img-top' src='{m.Image}'>" +
+        $"    </div>" +
+        $"</div>"
+        ).Encoded(false);
         columns.Add(m => m.ManufacturerName)
             .Titled("Производитель");
         columns.Add(m => m.Description);
@@ -30,8 +41,8 @@ Html.Grid(Model)
         columns.Add(m => m.Form);
 
 
-        if(User.IsInRole("Admin"))
-{
+        if (User.IsInRole("Admin"))
+        {
             columns.Add(m =>
                  $"<a href='{Url.Action("Edit", new { id = m.Id })}' class='btn btn-xs btn-default' title='Изменить'>" +
                         "<i class='fa fa-edit'></i>" +

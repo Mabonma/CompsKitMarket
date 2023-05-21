@@ -1,5 +1,7 @@
 ﻿using CompsKitMarket.Core.Entities.Enums;
 using CompsKitMarket.Core.Entities.Orders;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
@@ -16,6 +18,7 @@ namespace CompsKitMarket.Models
         [Display(Name = "Производитель")]
         public string ManufacturerName { get; set; } = null!;
 
+        [Required(ErrorMessage = "Обязательное поле")]
         public int ManufacturerId { get; set; }
 
         [NotMapped]
@@ -23,6 +26,16 @@ namespace CompsKitMarket.Models
 
         [Display(Name = "Описание")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Обязательное поле")]
+        [Display(Name = "Картинка")]
+        public IFormFile Image { get; set; }
+
+        [NotMapped]
+        public byte[] Data { get; set; }
+        [NotMapped]
+        public string DataFormat => Data == null ? null
+            : String.Format("data:image/gif;base64,{0}", Convert.ToBase64String(Data));
 
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Тип жёсткого диска")]

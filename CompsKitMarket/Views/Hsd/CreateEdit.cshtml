@@ -9,7 +9,7 @@
         @text
     </h4>
     <hr />
-    <form asp-action="Save" method="post">
+    <form asp-action="Save" method="post" enctype="multipart/form-data">
         <div class="row">
             @Html.AntiForgeryToken()
             @Html.HiddenFor(m => m.Id)
@@ -33,6 +33,12 @@
                 <option selected="selected" value="">Выберите тип</option>
             </select>
 
+            <div class="w-100"><hr></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
             <div class="w-100"><hr></div>
 
             <div class="col-md-4">

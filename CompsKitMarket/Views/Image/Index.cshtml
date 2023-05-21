@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CompsKitMarket.Models.Image.ImageTable>
+
+@{
+    ViewData["Title"] = "Все картинки";
+}
+@(
+Html.Grid(Model)
+    .Id("mvc-grid")
+    .Build(columns =>
+    {
+        columns.Add(m => m.Id)
+            .Titled("Id")
+            .Sortable(true);
+        columns.Add(m =>
+
+        $"<div class='div-square'>" +
+        $"    <div class='div-square-margin'></div>" +
+        $"    <div class='div-square-content'>" +
+        $"            <img class='card-img-top' src='{m.ContenString}' '>" +
+        $"    </div>" +
+        $"</div>"
+        )@*.Width("100").Encoded(false)*@;
+        columns.Add(m => m.Name);
+        columns.Add(m => m.Type);
+    })
+    .Sortable()
+    .Filterable()
+    .Empty("Нет данных")
+    .Css("table-bordered table-hover")
+)
