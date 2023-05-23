@@ -1,0 +1,149 @@
+﻿@model CompsKitMarket.Models.Charge.ChargeModel
+@{
+    string text = Model.IsNew ? "Добавление" : "Редактирование";
+    ViewData["Title"] = text;
+}
+
+<div class="pb-3 bg-light p-5 rounded border">
+    <h4>
+        @text
+    </h4>
+    <hr />
+    <form asp-action="Save" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Производитель</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ManufacturerId, ViewData["Manufacturers"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Cpu4" class="control-label"></label>
+                    <input asp-for="Cpu4" class="form-control" />
+                    <span asp-validation-for="Cpu4" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Cpu8" class="control-label"></label>
+                    <input asp-for="Cpu8" class="form-control" />
+                    <span asp-validation-for="Cpu8" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Sata" class="control-label"></label>
+                    <input asp-for="Sata" class="form-control" />
+                    <span asp-validation-for="Sata" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Pcle6" class="control-label"></label>
+                    <input asp-for="Pcle6" class="form-control" />
+                    <span asp-validation-for="Pcle6" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Pcle8" class="control-label"></label>
+                    <input asp-for="Pcle8" class="form-control" />
+                    <span asp-validation-for="Pcle8" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Pcle16" class="control-label"></label>
+                    <input asp-for="Pcle16" class="form-control" />
+                    <span asp-validation-for="Pcle16" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Fdd" class="control-label"></label>
+                    <input asp-for="Fdd" class="form-control" />
+                    <span asp-validation-for="Fdd" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Ide" class="control-label"></label>
+                    <input asp-for="Ide" class="form-control" />
+                    <span asp-validation-for="Ide" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Usb" class="control-label"></label>
+                    <input asp-for="Usb" class="form-control" />
+                    <span asp-validation-for="Usb" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Height" class="control-label"></label>
+                    <input asp-for="Height" class="form-control" />
+                    <span asp-validation-for="Height" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Width" class="control-label"></label>
+                    <input asp-for="Width" class="form-control" />
+                    <span asp-validation-for="Width" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Deep" class="control-label"></label>
+                    <input asp-for="Deep" class="form-control" />
+                    <span asp-validation-for="Deep" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

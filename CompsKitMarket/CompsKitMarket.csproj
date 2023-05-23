@@ -14,6 +14,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Models\Charge\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.17" />
@@ -34,6 +38,30 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CompsKitMarket.Core\CompsKitMarket.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Models\Charge\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Models\Charge\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Charge\CreateEdit.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Charge\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Charge\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Charge\CreateEdit.cshtml" />
   </ItemGroup>
 
 </Project>

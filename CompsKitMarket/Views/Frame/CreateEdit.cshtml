@@ -1,0 +1,131 @@
+﻿@model CompsKitMarket.Models.Frame.FrameModel
+@{
+    string text = Model.IsNew ? "Добавление" : "Редактирование";
+    ViewData["Title"] = text;
+}
+
+<div class="pb-3 bg-light p-5 rounded border">
+    <h4>
+        @text
+    </h4>
+    <hr />
+    <form asp-action="Save" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+
+            <select class="form-select form-select-sm" asp-for="Form" asp-items="Html.GetEnumSelectList<FrameForm>()">
+                <option selected="selected" value="">Выберите тип</option>
+            </select>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Fans" class="control-label"></label>
+                    <input asp-for="Fans" class="form-control" />
+                    <span asp-validation-for="Fans" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Производитель</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ManufacturerId, ViewData["Manufacturers"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Размер материнской платы</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.MotherFormId, ViewData["Motherforms"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-check">
+                <input class="form-check-input" asp-for="Game" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Игровой
+                </label>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <select class="form-select form-select-sm" asp-for="Color" asp-items="Html.GetEnumSelectList<Color>()">
+                <option selected="selected" value="">Выберите цвет</option>
+            </select>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="InsideHsdSize3" class="control-label"></label>
+                    <input asp-for="InsideHsdSize3" class="form-control" />
+                    <span asp-validation-for="InsideHsdSize3" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="InsideHsdSize2" class="control-label"></label>
+                    <input asp-for="InsideHsdSize2" class="form-control" />
+                    <span asp-validation-for="InsideHsdSize2" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="VideoLenght" class="control-label"></label>
+                    <input asp-for="VideoLenght" class="form-control" />
+                    <span asp-validation-for="VideoLenght" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="CoolHeight" class="control-label"></label>
+                    <input asp-for="CoolHeight" class="form-control" />
+                    <span asp-validation-for="CoolHeight" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="ChargeLength" class="control-label"></label>
+                    <input asp-for="ChargeLength" class="form-control" />
+                    <span asp-validation-for="ChargeLength" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
