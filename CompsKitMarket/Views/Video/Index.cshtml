@@ -1,6 +1,6 @@
-﻿@model IEnumerable<CompsKitMarket.Models.Cpu.CpuTable>
+﻿@model IEnumerable<CompsKitMarket.Models.Video.VideoTable>
 @{
-    ViewData["Title"] = "Процессоры";
+    ViewData["Title"] = "Видеокарты";
 }
 <div class="widget-title d-flex">
     @if (User.Identity.IsAuthenticated)
@@ -33,18 +33,13 @@ Html.Grid(Model)
         ).Encoded(false);
         columns.Add(m => m.ManufacturerName);
         columns.Add(m => m.Description);
-        columns.Add(m => m.ProcSocketName);
-        columns.Add(m => m.ProcModelName);
-        columns.Add(m => m.TypeRamName);
-        columns.Add(m => m.Cores);
-        columns.Add(m => m.Graf ? "Да" : "Нет");
-        columns.Add(m => m.Crystal);
-        columns.Add(m => m.BaseFreq);
-        columns.Add(m => m.MaxFreq);
-        columns.Add(m => m.MultiThread ? "Да" : "Нет");
-        columns.Add(m => m.Tdp);
-        columns.Add(m => m.BoxType);
-        columns.Add(m => m.Tehprocess);
+        columns.Add(m => m.GrafProcName);
+        columns.Add(m => m.GrafProcName);
+        columns.Add(m => m.VramVol);
+        columns.Add(m => m.VramTypeName);
+        columns.Add(m => m.Cooling);
+        columns.Add(m => m.BusInter);
+        columns.Add(m => m.Rtx ? "Есть" : "Нет");
 
 
         if (User.IsInRole("Admin"))

@@ -1,0 +1,93 @@
+﻿@model CompsKitMarket.Models.Video.VideoModel
+@{
+    string text = Model.IsNew ? "Добавление" : "Редактирование";
+    ViewData["Title"] = text;
+}
+
+<div class="pb-3 bg-light p-5 rounded border">
+    <h4>
+        @text
+    </h4>
+    <hr />
+    <form asp-action="Save" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Производитель</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ManufacturerId, ViewData["Manufacturers"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Размер материнской платы</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.GrafProcId, ViewData["GrafProc"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="VramVol" class="control-label"></label>
+                    <input asp-for="VramVol" class="form-control" />
+                    <span asp-validation-for="VramVol" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Размер материнской платы</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.VramTypeId, ViewData["TypeRams"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <select class="form-select form-select-sm" asp-for="BusInter" asp-items="Html.GetEnumSelectList<BusType>()">
+                <option selected="selected" value="">Выберите шину видеопамяти</option>
+            </select>
+            <select class="form-select form-select-sm" asp-for="Cooling" asp-items="Html.GetEnumSelectList<TypeCooling>()">
+                <option selected="selected" value="">Выберите охлаждение</option>
+            </select>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="Rtx" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1" asp-for="Rtx"></label>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
