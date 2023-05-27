@@ -1,0 +1,145 @@
+﻿@model CompsKitMarket.Models.Cpu.CpuModel
+@{
+    string text = Model.IsNew ? "Добавление" : "Редактирование";
+    ViewData["Title"] = text;
+}
+
+<div class="pb-3 bg-light p-5 rounded border">
+    <h4>
+        @text
+    </h4>
+    <hr />
+    <form asp-action="Save" method="post" enctype="multipart/form-data">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Id)
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Производитель</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ManufacturerId, ViewData["Manufacturers"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" accept=".jpg,.png,.gif,.jpeg" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Размер материнской платы</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ProcSocketId, ViewData["ProcSockets"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Размер материнской платы</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.ProcModelId, ViewData["ProcModels"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">Размер материнской платы</label>
+                    <div class="form-line">
+                        @Html.DropDownListFor(m => m.TypeRamId, ViewData["TypeRams"] as List<SelectListItem>, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Cores" class="control-label"></label>
+                    <input asp-for="Cores" class="form-control" />
+                    <span asp-validation-for="Cores" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="Graf" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Игровой
+                </label>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Crystal" class="control-label"></label>
+                    <input asp-for="Crystal" class="form-control" />
+                    <span asp-validation-for="Crystal" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="BaseFreq" class="control-label"></label>
+                    <input asp-for="BaseFreq" class="form-control" />
+                    <span asp-validation-for="BaseFreq" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="MaxFreq" class="control-label"></label>
+                    <input asp-for="MaxFreq" class="form-control" />
+                    <span asp-validation-for="MaxFreq" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" asp-for="MultiThread" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Игровой
+                </label>
+            </div>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Tdp" class="control-label"></label>
+                    <input asp-for="Tdp" class="form-control" />
+                    <span asp-validation-for="Tdp" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label asp-for="Tehprocess" class="control-label"></label>
+                    <input asp-for="Tehprocess" class="form-control" />
+                    <span asp-validation-for="Tehprocess" class="text-danger"></span>
+                </div>
+            </div>
+            <select class="form-select form-select-sm" asp-for="BoxType" asp-items="Html.GetEnumSelectList<BoxesType>()">
+                <option selected="selected" value="">Выберите тип</option>
+            </select>
+
+            <div class="w-100"><hr></div>
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
