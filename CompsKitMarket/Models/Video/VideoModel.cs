@@ -12,12 +12,14 @@ namespace CompsKitMarket.Models.Video
         [NotMapped]
         public bool IsNew => Id == 0;
 
+        [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Графический процессор")]
         public int GrafProcId { get; set; }
 
         [Display(Name = "Видеопамять")]
         public int VramVol { get; set; }
 
+        [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Тип видеопамяти")]
         public int VramTypeId { get; set; }
 
