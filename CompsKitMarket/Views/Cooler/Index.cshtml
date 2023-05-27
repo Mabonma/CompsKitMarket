@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CompsKitMarket.Models.Cooler.CoolerTable>
+@{
+    ViewData["Title"] = "Системы охлаждения";
+}
+<div class="widget-title d-flex">
+    @if (User.Identity.IsAuthenticated)
+    {
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-primary ml-auto mb-3" asp-action="Create">Добавить</a>
+        }
+    }
+</div>
+@(
+Html.Grid(Model)
+    .Id("mvc-grid")
+    .Build(columns =>
+    {
+        if (User.IsInRole("Admin"))
+        {
+            columns.Add(m => m.Id)
+                .Titled("Id")
+                .Sortable(true);
+        }
+        columns.Add(m => m.Name);
+        columns.Add(m =>
+        $"<div class='div-square'>" +
+        $"    <div class='div-square-margin'></div>" +
+        $"    <div class='div-square-content'>" +
+        $"            <img class='card-img-top' src='{m.DataFormat}'>" +
+        $"    </div>" +
+        $"</div>"
+        ).Encoded(false);
+        columns.Add(m => m.ManufacturerName);
+        columns.Add(m => m.Description);
+        columns.Add(m => m.CoolerTypeName);
+        columns.Add(m => m.ProcSocketName);
+        columns.Add(m => m.TypeCooling);
+        columns.Add(m => m.Diam);
+        columns.Add(m => m.Tdp);
+        columns.Add(m => m.CountFan);
+        columns.Add(m => m.Height);
+        columns.Add(m => m.Width);
+        columns.Add(m => m.Rpm);
+
+
+        if (User.IsInRole("Admin"))
+        {
+            columns.Add(m =>
+                 $"<a href='{Url.Action("Edit", new { id = m.Id })}' class='btn btn-xs btn-default' title='Изменить'>" +
+                        "<i class='fa fa-edit'></i>" +
+                    "</a>" +
+                 $"<button type='button' class='btn btn-xs' onclick=CallRemove('{Url.Action("Delete", new { id = m.Id })}')>" +
+                    "<i class='fa fa-trash'></i>" +
+                 "</button>")
+                .Encoded(false)
+                .Css("w-100px col-btn-full");
+        }
+    })
+    .Sortable()
+    .Filterable()
+    .Empty("Нет данных")
+    .Css("table-bordered table-hover")
+)
