@@ -153,7 +153,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Charge charge = _marketContext.Charges.FirstOrDefault(x => x.Id == id);

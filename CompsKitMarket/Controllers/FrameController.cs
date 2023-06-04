@@ -149,7 +149,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Frame entity = _marketContext.Frames.FirstOrDefault(x => x.Id == id);

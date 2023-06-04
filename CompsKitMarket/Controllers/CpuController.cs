@@ -156,7 +156,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Cpu entity = _marketContext.Cpus.FirstOrDefault(x => x.Id == id);

@@ -96,7 +96,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Manufacturer manufacturer = _marketContext.Manufacturers.FirstOrDefault(manufacturer => manufacturer.Id == id);

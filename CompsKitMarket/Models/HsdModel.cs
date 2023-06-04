@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace CompsKitMarket.Models
 {
-    public class HsdModel : BasedModel
+    public class HsdModel : BasedModel/*, ICloneable*/
     {
         [Required(ErrorMessage = "Обязательное поле")]
         [Display(Name = "Название")]
@@ -54,5 +54,10 @@ namespace CompsKitMarket.Models
         public HsdForms Form { get; set; }
 
         public bool Deleted { get; set; }
+
+        //public object Clone()
+        //{
+        //    return this.MemberwiseClone();
+        //}
     }
 }

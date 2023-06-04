@@ -4,11 +4,8 @@
 // Write your JavaScript code.
 function CallRemove(url) {
     if (!confirm("Вы уверены, что хотите удалить эту запись?")) {
-        console.log("Success");
         return;
     }
-    console.log("SuccessNot");
-    return;
     $.ajax({
         type: "Delete",
         url: url,
@@ -33,6 +30,7 @@ function editModal(url, feedback) {
             $("#directoryModal").modal('show')
             if (feedback)
                 feedback();
+            location.reload();
         },
         failure: function (response) {
             console.error(response.responseText);

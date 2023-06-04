@@ -43,22 +43,28 @@ namespace CompsKitMarket.Controllers
                     Deleted = x.Deleted,
                 })
                 .ToList();
-            /*HsdModel hsd = new() 
-            {
-                Id = 1,
-                Name = "TurboVol",
-                Description = "",
-                Type = HsdTypes.Hdd,
-                Connections = HsdConnections.Sata3,
-                Vol = 500,
-                Form = HsdForms.Full,
-                Deleted = false
-            };
-            List<HsdModel> hsds = new() { hsd };
-            hsds.Add(hsd);
-            hsds.Add(hsd);
-            hsds.Add(hsd);
-            hsds.Add(hsd);*/
+            //HsdModel hsd = new() 
+            //{
+            //    Id = 1,
+            //    Name = "TurboVol",
+            //    Description = "",
+            //    Type = HsdTypes.Hdd,
+            //    Connections = HsdConnections.Sata3,
+            //    Vol = 500,
+            //    Form = HsdForms.Full,
+            //    Deleted = false
+            //};
+            //List<HsdModel> hsds = new()
+            //{
+            //    hsd,
+            //    (HsdModel) hsd.Clone(),
+            //    (HsdModel) hsd.Clone(),
+            //    (HsdModel) hsd.Clone(),
+            //    (HsdModel) hsd.Clone()
+            //};
+            //hsds[1].Id = 2;
+            //hsds[2].Id = 3;
+            //hsds[3].Id = 4;
 
             return View(/*hsds*/items);
         }
@@ -147,7 +153,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Hsd hsd = _marketContext.Hsds.FirstOrDefault(hsd => hsd.Id == id);

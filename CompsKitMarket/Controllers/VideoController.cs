@@ -132,7 +132,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Video entity = _marketContext.Videos.FirstOrDefault(x => x.Id == id);

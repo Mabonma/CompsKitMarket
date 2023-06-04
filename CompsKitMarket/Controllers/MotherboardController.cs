@@ -150,7 +150,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Motherboard entity = _marketContext.Motherboards.FirstOrDefault(x => x.Id == id);

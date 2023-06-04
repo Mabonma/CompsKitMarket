@@ -149,7 +149,6 @@ namespace CompsKitMarket.Controllers
         }
 
         [HttpDelete]
-        [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             Cooler entity = _marketContext.Coolers.FirstOrDefault(x => x.Id == id);
